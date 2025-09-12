@@ -1,0 +1,100 @@
+/* -------------------- Calendar Container -------------------- */
+.calendar-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+  background-color: #fff0f6;
+}
+
+/* -------------------- Month Card -------------------- */
+.month-card {
+  display: inline-block;
+  background-color: #fff0f6;
+  margin: 15px;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  transition: transform 0.2s;
+}
+
+.month-card:hover {
+  transform: translateY(-5px);
+}
+
+.month-card h4 {
+  text-align: center;
+  color: #e75480;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+/* -------------------- Days Grid -------------------- */
+.days-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* -------------------- Day Box -------------------- */
+.day {
+  width: 35px;
+  height: 35px;
+  margin: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.2s;
+  font-weight: 500;
+  color: #333;
+}
+
+.day:hover {
+  background-color: #ffd1dc; /* light pink hover */
+}
+
+.day.selected {
+  background-color: #e75480; /* bright pink selected */
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Highlight today */
+.day.today {
+  border: 2px solid #e75480;
+  font-weight: 600;
+}
+
+/* -------------------- Responsive -------------------- */
+@media (max-width: 768px) {
+  .month-card {
+    width: 45%;
+    margin: 10px 5px;
+    padding: 15px;
+  }
+
+  .day {
+    width: 30px;
+    height: 30px;
+    margin: 2px;
+  }
+}
+
+@media (max-width: 480px) {
+  .month-card {
+    width: 90%;
+    margin: 10px auto;
+    padding: 15px;
+  }
+
+  .day {
+    width: 28px;
+    height: 28px;
+    margin: 2px;
+    font-size: 14px;
+  }
+}
