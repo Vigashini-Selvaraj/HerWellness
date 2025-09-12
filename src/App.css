@@ -1,3 +1,11 @@
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #ffe6f0; /* 💖 pink background for whole screen */
+}
+
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -40,3 +48,10 @@
 .read-the-docs {
   color: #888;
 }
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+

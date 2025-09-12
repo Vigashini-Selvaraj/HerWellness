@@ -5,6 +5,8 @@ import Navbar from "./components/Navbar";
 import Calendar from "./components/Calendar";
 import Insights from "./components/Insights";
 import Home from "./components/Home";
+import TodayPage from "./components/Today";
+import "./App.css"; // make sure it's imported
 
 export default function App() {
   const [showSplash, setShowSplash] = useState(true);
@@ -13,7 +15,6 @@ export default function App() {
   );
 
   useEffect(() => {
-    // Only show splash if not seen
     const splashShown = localStorage.getItem("splashShown");
     if (splashShown) {
       setShowSplash(false);
@@ -25,15 +26,21 @@ export default function App() {
       {showSplash ? (
         <Splash onFinish={() => setShowSplash(false)} />
       ) : (
-        <>
+        <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
           <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser} />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/calendar" element={<Calendar currentUser={currentUser} />} />
-            <Route path="/insights" element={<Insights />} />
-          </Routes>
-        </>
+          <div style={{ flex: 1 }}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/today" element={<TodayPage currentUser={currentUser} />} /> {/* ADD THIS */}
+              <Route path="/calendar" element={<Calendar currentUser={currentUser} />} />
+              <Route path="/insights" element={<Insights />} />
+              <Route path="*" element={<h2 className="text-center mt-5">Page Not Found</h2>} />
+            </Routes>
+          </div>
+        </div>
       )}
     </Router>
   );
 }
+

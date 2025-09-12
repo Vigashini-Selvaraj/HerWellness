@@ -1,53 +1,96 @@
-/* Home.css */
+/* Global Home Container */
+.home-container {
+  width: 100vw;                   /* full width */
+  min-height: 100vh;              /* at least full screen */
+  background: linear-gradient(135deg, #ffe6f0, #fff0f5, #fffaf0);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
 
-.hero {
+/* Hero Section */
+.hero-section {
+  width: 100vw;
   min-height: 100vh;
-  padding: 100px 0 50px 0;
-  background: linear-gradient(135deg, #ffe6f0, #ffd6e8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
 }
 
-.highlight-text {
-  color: #ff4081;
+/* Make hero paragraph narrower and centered */
+.hero-paragraph {
+  max-width: 700px;  /* adjust width as needed */
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;   /* improve readability */
+}
+
+/* About Section */
+.about-section {
+  width: 100vw;
+  padding: 5vw;
+  background: linear-gradient(135deg, #ffe6f0, #fff0f5, #fffaf0);
+}
+
+.about-section .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.about-section .col-md-6 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Facts Section */
+.facts-section {
+  width: 100vw;
+  padding: 5vw;
+  background: linear-gradient(135deg, #ffe6f0, #fff0f5, #fffaf0);
+}
+
+.fact-card {
+  transition: transform 0.3s ease;
+}
+
+.fact-card:hover {
+  transform: scale(1.03);
+}
+
+/* Testimonials Section */
+.testimonials-section {
+  width: 100vw;
+  padding: 5vw;
+  background: linear-gradient(135deg, #ffe6f0, #fff0f5, #fffaf0);
+}
+
+.testimonial-card {
+  transition: transform 0.3s ease;
+}
+
+.testimonial-card:hover {
+  transform: scale(1.05);
+}
+
+/* FAQs Section */
+.faqs-section {
+  width: 100vw;
+  padding: 5vw;
+  background: linear-gradient(135deg, #ffe6f0, #fff0f5, #fffaf0);
+}
+
+.accordion-button {
   font-weight: 600;
-  font-size: 18px;
-  margin-bottom: 10px;
+  color: #dc3545; /* Bootstrap danger red */
 }
 
-.hero-title {
-  font-size: 48px;
-  font-weight: 700;
-  margin-bottom: 20px;
-  color: #333;
-  line-height: 1.2;
-}
-
-.hero-desc {
-  font-size: 18px;
-  color: #555;
-  max-width: 500px;
-}
-
-.img-fluid {
+/* Responsive images */
+img {
   max-width: 100%;
   height: auto;
-}
-
-.rounded {
-  border-radius: 15px;
-}
-
-.shadow {
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-@media (max-width: 992px) {
-  .hero {
-    padding: 80px 0 30px 0;
-  }
-  .hero-title {
-    font-size: 36px;
-  }
-  .hero-desc {
-    font-size: 16px;
-  }
+  display: block;
 }

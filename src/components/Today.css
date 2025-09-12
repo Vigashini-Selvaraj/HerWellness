@@ -1,0 +1,80 @@
+/* today.css */
+
+/* Hover and active states for moods and symptoms buttons */
+button.py-3.px-4 {
+  transition: all 0.2s ease-in-out;
+}
+button.py-3.px-4:hover {
+  transform: scale(1.05);
+}
+
+/* Selected buttons */
+button.bg-rose-500 {
+  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+}
+
+/* Textarea focus */
+textarea:focus {
+  border-color: #f43f5e; /* Tailwind rose-500 */
+  outline: none;
+  transition: border-color 0.2s ease-in-out;
+}
+
+/* Section spacing */
+.section {
+  margin-bottom: 1.5rem;
+}
+
+/* Main header */
+header h1 {
+  color: #be123c; /* Tailwind rose-800 */
+  font-weight: 800;
+}
+
+/* Daily log cards */
+.bg-rose-50 {
+  background-color: #fff1f2; /* Tailwind rose-50 */
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
+.shadow-xl {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+              0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.rounded-2xl {
+  border-radius: 1rem;
+}
+
+.rounded-3xl {
+  border-radius: 1.5rem;
+}
+
+/* Main container padding */
+main.flex-1 {
+  padding: 2rem;
+}
+
+/* Buttons for save and cancel */
+button.bg-rose-500,
+button.bg-gray-200 {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+button.bg-rose-500:hover,
+button.bg-gray-200:hover {
+  transform: scale(1.05);
+}
+
+/* Sidebar nav item hover */
+aside div div div {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Responsive grid spacing */
+.grid {
+  gap: 1rem;
+}
