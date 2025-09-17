@@ -4,7 +4,7 @@ import { marked } from "marked";
 import insightsData from "./insights.json";
 import "./insights.css";
 
-export default function ArticlePage() {
+export default function Article() {
   const { id } = useParams();
   const [article, setArticle] = useState(null);
 
