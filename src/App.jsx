@@ -5,7 +5,7 @@ import Calendar from "./components/Calendar";
 import Today from "./components/Today";
 import Home from "./components/Home";
 import Insights from "./components/Insights";
-import Article from "./components/Article"; 
+ 
 import Chat from "./components/Chat"; // ✅ chatbot page
 
 export default function App() {
