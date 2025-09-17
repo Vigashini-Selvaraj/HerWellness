@@ -1,80 +1,60 @@
-/* today.css */
-
-/* Hover and active states for moods and symptoms buttons */
-button.py-3.px-4 {
-  transition: all 0.2s ease-in-out;
-}
-button.py-3.px-4:hover {
-  transform: scale(1.05);
+.today-container {
+  background: linear-gradient(to bottom, #ffe6f0, #fff);
+  min-height: 100vh;
+  padding: 20px;
+  font-family: Arial, sans-serif;
 }
 
-/* Selected buttons */
-button.bg-rose-500 {
-  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+.status-box {
+  text-align: center;
+  padding: 30px 15px;
 }
 
-/* Textarea focus */
-textarea:focus {
-  border-color: #f43f5e; /* Tailwind rose-500 */
-  outline: none;
-  transition: border-color 0.2s ease-in-out;
+.status-box h2 {
+  color: #e75480;
+  font-size: 22px;
+  margin-bottom: 15px;
 }
 
-/* Section spacing */
-.section {
-  margin-bottom: 1.5rem;
+.log-btn {
+  background: #e75480;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
-/* Main header */
-header h1 {
-  color: #be123c; /* Tailwind rose-800 */
-  font-weight: 800;
+.log-btn:hover {
+  background: #d2436e;
 }
 
-/* Daily log cards */
-.bg-rose-50 {
-  background-color: #fff1f2; /* Tailwind rose-50 */
+.symptom-box {
+  margin-top: 30px;
 }
 
-.bg-white {
-  background-color: #ffffff;
+.symptom-box h3 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 15px;
 }
 
-.shadow-xl {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-              0 4px 6px -2px rgba(0, 0, 0, 0.05);
+.cards {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding-bottom: 10px;
 }
 
-.rounded-2xl {
-  border-radius: 1rem;
-}
-
-.rounded-3xl {
-  border-radius: 1.5rem;
-}
-
-/* Main container padding */
-main.flex-1 {
-  padding: 2rem;
-}
-
-/* Buttons for save and cancel */
-button.bg-rose-500,
-button.bg-gray-200 {
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
-
-button.bg-rose-500:hover,
-button.bg-gray-200:hover {
-  transform: scale(1.05);
-}
-
-/* Sidebar nav item hover */
-aside div div div {
-  transition: all 0.3s ease-in-out;
-}
-
-/* Responsive grid spacing */
-.grid {
-  gap: 1rem;
+.card {
+  background: white;
+  padding: 15px;
+  border-radius: 15px;
+  min-width: 180px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  font-size: 14px;
+  color: #444;
+  text-align: center;
 }

@@ -1,22 +1,29 @@
-/* -------------------- Calendar Container -------------------- */
+/* Calendar container - full width grid */
 .calendar-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 20px;
-  background-color: #fff0f6;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  padding: 30px;
+
+  background-color: #fff0f6;  /* light pink */
+
+  width: 100vw;   /* full viewport width */
+  min-height: 100vh; /* full viewport height */
+  box-sizing: border-box;
+margin-top: 100px;
+  justify-items: center;
 }
 
-/* -------------------- Month Card -------------------- */
+
+/* Each month card takes full width of its column */
 .month-card {
-  display: inline-block;
   background-color: #fff0f6;
-  margin: 15px;
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  width: 250px;
+  text-align: center;
   transition: transform 0.2s;
+  width: 100%; /* full column width */
 }
 
 .month-card:hover {
@@ -24,77 +31,68 @@
 }
 
 .month-card h4 {
-  text-align: center;
   color: #e75480;
   margin-bottom: 15px;
   font-weight: 600;
 }
 
-/* -------------------- Days Grid -------------------- */
+/* Days grid */
 .days-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  justify-items: center;
 }
 
-/* -------------------- Day Box -------------------- */
+/* Day styling */
 .day {
-  width: 35px;
-  height: 35px;
-  margin: 3px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  border-radius: 50%;
-  transition: all 0.2s;
   font-weight: 500;
   color: #333;
+  transition: all 0.2s;
 }
 
 .day:hover {
-  background-color: #ffd1dc; /* light pink hover */
+  background-color: #ffd1dc;
 }
 
 .day.selected {
-  background-color: #e75480; /* bright pink selected */
+  background-color: #dc3545;
   color: white;
   font-weight: bold;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
-/* Highlight today */
 .day.today {
   border: 2px solid #e75480;
-  font-weight: 600;
 }
 
-/* -------------------- Responsive -------------------- */
-@media (max-width: 768px) {
-  .month-card {
-    width: 45%;
-    margin: 10px 5px;
-    padding: 15px;
+.day.empty {
+  background: transparent;
+  cursor: default;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .calendar-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 per row */
+  }
+}
+
+@media (max-width: 600px) {
+  .calendar-container {
+    grid-template-columns: 1fr; /* 1 per row */
   }
 
   .day {
-    width: 30px;
-    height: 30px;
-    margin: 2px;
+    width: 35px;
+    height: 35px;
   }
 }
 
-@media (max-width: 480px) {
-  .month-card {
-    width: 90%;
-    margin: 10px auto;
-    padding: 15px;
-  }
 
-  .day {
-    width: 28px;
-    height: 28px;
-    margin: 2px;
-    font-size: 14px;
-  }
-}

@@ -3,77 +3,81 @@ import "./Calendar.css";
 
 const Calendar = ({ currentUser }) => {
   const today = new Date();
-  const startYear = today.getFullYear();
+  const startYear = 2025;
   const endYear = startYear + 5;
 
-  const [selectedDates, setSelectedDates] = useState([]);
+  const [selectedDates, setSelectedDates] = useState(null); // null means "not loaded yet"
 
-  // Load saved dates for this user whenever they log in
-  useEffect(() => {
-    if (!currentUser) {
-      setSelectedDates([]); // logged out → show nothing
-      return;
-    }
-    const saved = JSON.parse(localStorage.getItem("selectedDates")) || {};
-    setSelectedDates(saved[currentUser] || []);
-  }, [currentUser]);
+  // Determine user key
+  const userKey = currentUser || "anonymous";
 
-  // Save user’s dates whenever they change
+  // Load selectedDates from localStorage once
   useEffect(() => {
-    if (!currentUser) return;
-    const saved = JSON.parse(localStorage.getItem("selectedDates")) || {};
-    saved[currentUser] = selectedDates;
+    const saved = JSON.parse(localStorage.getItem("selectedDates") || "{}");
+    setSelectedDates(saved[userKey] || []);
+  }, [userKey]);
+
+  // Save selectedDates to localStorage whenever they change
+  useEffect(() => {
+    if (selectedDates === null) return; // don't save before loading
+
+    const saved = JSON.parse(localStorage.getItem("selectedDates") || "{}");
+    saved[userKey] = selectedDates;
     localStorage.setItem("selectedDates", JSON.stringify(saved));
-  }, [selectedDates, currentUser]);
+  }, [selectedDates, userKey]);
 
-  const toggleDate = (dateStr) => {
-    if (!currentUser) {
-      alert("Please login to mark dates!");
-      return;
-    }
-    setSelectedDates((prev) =>
-      prev.includes(dateStr)
-        ? prev.filter((d) => d !== dateStr)
-        : [...prev, dateStr]
+  // Wait until selectedDates are loaded
+  if (selectedDates === null) return null;
+
+  const formatDate = (y, m, d) => new Date(y, m, d).toISOString().split("T")[0];
+
+  const toggleDate = (y, m, d) => {
+    const f = formatDate(y, m, d);
+    setSelectedDates(prev =>
+      prev.includes(f) ? prev.filter(d => d !== f) : [...prev, f]
     );
   };
 
-  const renderMonth = (year, month) => {
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-    const monthName = new Date(year, month).toLocaleString("default", {
-      month: "long",
-    });
+  const renderMonth = (y, m) => {
+    const daysInMonth = new Date(y, m + 1, 0).getDate();
+    const firstDay = new Date(y, m, 1).getDay();
+    const monthName = new Date(y, m).toLocaleString("default", { month: "long" });
+
+    const days = [];
+    for (let i = 0; i < firstDay; i++)
+      days.push(<div key={`empty-${i}`} className="day empty" />);
+
+    for (let i = 1; i <= daysInMonth; i++) {
+      const f = formatDate(y, m, i);
+      const isSelected = selectedDates.includes(f);
+      const isToday =
+        today.getFullYear() === y &&
+        today.getMonth() === m &&
+        today.getDate() === i;
+
+      days.push(
+        <div
+          key={f}
+          className={`day ${isSelected ? "selected" : ""} ${isToday ? "today" : ""}`}
+          onClick={() => toggleDate(y, m, i)}
+        >
+          {i}
+        </div>
+      );
+    }
 
     return (
-      <div className="month-card" key={`${year}-${month}`}>
-        <h4>
-          {monthName} {year}
-        </h4>
-        <div className="days-grid">
-          {Array.from({ length: daysInMonth }, (_, i) => {
-            const dateStr = `${year}-${month + 1}-${i + 1}`;
-            const isSelected = selectedDates.includes(dateStr);
-            return (
-              <div
-                key={dateStr}
-                className={`day ${isSelected ? "selected" : ""}`}
-                onClick={() => toggleDate(dateStr)}
-              >
-                {i + 1}
-              </div>
-            );
-          })}
-        </div>
+      <div key={`${y}-${m}`} className="month-card">
+        <h4>{monthName} {y}</h4>
+        <div className="days-grid">{days}</div>
       </div>
     );
   };
 
   const months = [];
-  for (let y = startYear; y < endYear; y++) {
-    for (let m = 0; m < 12; m++) {
+  for (let y = startYear; y < endYear; y++)
+    for (let m = 0; m < 12; m++)
       months.push(renderMonth(y, m));
-    }
-  }
 
   return <div className="calendar-container">{months}</div>;
 };

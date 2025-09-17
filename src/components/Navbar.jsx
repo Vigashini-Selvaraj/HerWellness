@@ -6,15 +6,10 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { Link } from "react-router-dom";
 
 
-export default function Navbar() {
-  const [currentUser, setCurrentUser] = useState(null);
+
 
   // Check if already logged in
-  useEffect(() => {
-    const user = localStorage.getItem("currentUser");
-    if (user) setCurrentUser(user);
-  }, []);
-
+export default function Navbar({ currentUser, setCurrentUser }) {
   // Logout function
   const handleLogout = () => {
     localStorage.removeItem("currentUser");
@@ -34,13 +29,16 @@ export default function Navbar() {
       return alert("Invalid credentials");
 
     localStorage.setItem("currentUser", email);
-    setCurrentUser(email);
+    setCurrentUser(email); // 🔑 update parent state
 
     alert("Logged in successfully!");
     const modalEl = document.getElementById("loginModal");
     const modal = window.bootstrap.Modal.getInstance(modalEl);
     modal.hide();
   };
+
+  // Register stays the same...
+
 
   // Register function
   const handleRegister = (e) => {
@@ -85,6 +83,7 @@ export default function Navbar() {
               <li className="nav-item mx-2"><a className="nav-link" href="/home">Home</a></li>
               <li className="nav-item mx-2"><a className="nav-link" href="/today">Today</a></li>
               <li className="nav-item mx-2"><a className="nav-link" href="/insights">Insights</a></li>
+              <li className="nav-item mx-2"><a className="nav-link" href="/Chat">Chat</a></li>
               <li className="nav-item mx-2"><a className="nav-link" href="/calendar">Calendar</a></li>
               <li className="nav-item mx-2">
                 {currentUser ? (

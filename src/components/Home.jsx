@@ -69,8 +69,7 @@ const Home = ({ onGetStarted }) => {
   </button>
 </section>
 
-
-      <section className="about-section my-5">
+<section className="about-section my-5">
   <div className="row align-items-center g-4">
     <div className="col-md-4">
       <img
