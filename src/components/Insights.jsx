@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import insightsData from "./insights.json";
-import "./insights.css";
+import "./Insights.css";
 
 export default function Insights() {
   const navigate = useNavigate();
