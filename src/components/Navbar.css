@@ -1,23 +1,43 @@
-/* Body padding to prevent content hiding under navbar */
-body {
-  padding-top: 100px; /* adjust based on navbar height */
+/* -------------------- NAVBAR -------------------- */
+
+/* Navbar red background */
+.bg-red-navbar {
+  background-color: #dc3545; /* Bootstrap red */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: background 0.3s ease;
+  padding: 0.8rem 1rem;
 }
 
-/* Navbar background & button colors */
-.bg-gradient-pink {
-  background-color: #f6606f;  !important;
+/* Navbar brand text logo */
+.navbar-brand {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  color: #fff !important;
+  letter-spacing: 1px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.navbar-brand:hover {
+  color: #ffdddd !important;
+  transform: scale(1.05);
 }
 
 /* Navbar buttons */
-.btn-pink {
-  background-color: #e75480;
+.btn-red {
+  background-color: #e85c6d;
   border: none;
   color: #fff;
-  font-weight: 500;
+  font-weight: 600;
+  padding: 8px 22px;
+  border-radius: 12px;
+  font-size: 16px;
+  transition: all 0.3s ease;
 }
 
-.btn-pink:hover {
-  background-color: #d64571;
+.btn-red:hover {
+  background-color: #c74355;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
   color: #fff;
 }
 
@@ -25,72 +45,60 @@ body {
 .navbar-nav .nav-link {
   font-size: 18px;
   font-weight: 500;
-  color: #333 !important;
+  color: #fff !important;
+  transition: color 0.3s ease, transform 0.2s ease;
 }
 
 .navbar-nav .nav-link:hover {
-  color: white !important;
-}
-
-/* Logo spacing */
-.navbar-brand img {
-  max-height: 80px;
-}
-
-/* Make navbar buttons same thickness as modal buttons */
-.navbar .btn-pink {
-  padding: 8px 20px;  /* adjust vertical and horizontal padding */
-  font-weight: 600;
-  border-radius: 10px;
-  font-size: 16px;
-}
-
-/* Hover effect */
-.navbar .btn-pink:hover {
-  background-color: #d64571;
-  color: #fff;
+  color: #ffcccc !important;
+  transform: scale(1.05);
 }
 
 /* -------------------- MODAL STYLING -------------------- */
 
 /* Modal background */
 .modal-content {
-  background-color: #f6a6c1; /* soft pink background */
-  border: none;
+  background-color: #ffe4e8; /* soft pink for contrast */
   border-radius: 20px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
 /* Modal header title */
 .modal-title {
-  color: #e75480; /* pinkish text */
+  color: #e85c6d;
   font-weight: 600;
   font-size: 1.5rem;
 }
 
-/* Input fields */
+/* Input fields inside modal */
 .modal-body .form-control {
   border-radius: 10px;
-  border: 1px solid #e75480;
+  border: 1px solid #e85c6d;
 }
 
 /* Buttons inside modal (Login/Register) */
-.modal-body .btn-pink {
+.modal-body .btn-red {
+  width: 100%;
   margin-top: 10px;
-  background-color: #e75480;
+  background-color: #dc3545;
   border: none;
   color: #fff;
   font-weight: 600;
+  padding: 10px 0;
+  font-size: 16px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
 }
 
-.modal-body .btn-pink:hover {
-  background-color: #d64571;
-  color: #fff;
+.modal-body .btn-red:hover {
+  background-color: #c74355;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
 /* Modal footer links */
 .modal-footer small a {
-  color: #e75480;
+  color: #e85c6d;
   text-decoration: none;
   font-weight: 500;
 }
@@ -103,8 +111,5 @@ body {
 @media (max-width: 768px) {
   .navbar-nav .nav-link {
     font-size: 16px;
-  }
-  .navbar-brand img {
-    max-height: 60px;
   }
 }

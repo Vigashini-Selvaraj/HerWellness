@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import insightsData from "./insights.json";
+import insightsData from "./insights.json"; // local import
 import "./Insights.css";
 
 export default function Insights() {

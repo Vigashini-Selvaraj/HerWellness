@@ -1,105 +1,200 @@
-/* Make the chatbot fill the entire screen */
-.chat-container {
-  width: 100%;
-  height: 100vh; /* full viewport height */
-  margin: 0;
-  border-radius: 0;
+/* 🌸 Fullscreen Layout */
+.chat-layout {
   display: flex;
-  flex-direction: column;
-  background: #ffe6ec; /* very light pink background */
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #ffe8ec, #fff7f9, #fef3ee);
   font-family: "Poppins", sans-serif;
+  overflow: hidden;
 }
 
+/* 🌼 Sidebar */
+.chat-sidebar {
+  width: 300px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 0;
+  border-right: 2px solid #ffd3d8;
+  box-shadow: 2px 0 10px rgba(255, 99, 99, 0.1);
+}
+
+.sidebar-item {
+  width: 80%;
+  padding: 14px 18px;
+  margin: 10px 0;
+  border-radius: 12px;
+  cursor: pointer;
+  background: white;
+  text-align: center;
+  font-weight: 600;
+  color: #ff5b6e;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 6px rgba(255, 182, 193, 0.3);
+}
+
+.sidebar-item.active,
+.sidebar-item:hover {
+  background: linear-gradient(135deg, #d51919, #ff5b6e);
+  color: white;
+  box-shadow: 0 4px 10px rgba(255, 105, 135, 0.4);
+  transform: translateY(-2px);
+}
+
+/* 💬 Chat Container (Takes remaining screen) */
+.chat-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(10px);
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 0 25px rgba(255, 105, 135, 0.08);
+  overflow: hidden;
+}
+
+/* 💖 Header */
 .chat-header {
-  background: #f2a6b5; /* danger red */
+  background: linear-gradient(135deg, #d51919, #ff5b6e);
   color: white;
   font-weight: 700;
   text-align: center;
-  padding: 16px;
-  font-size: 20px;
-  letter-spacing: 1px;
+  padding: 18px;
+  font-size: 21px;
+  letter-spacing: 0.6px;
+  box-shadow: 0 2px 8px rgba(255, 99, 132, 0.25);
 }
 
+/* 🌼 Messages Area */
 .messages {
   flex: 1;
-  padding: 20px;
+  padding: 24px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  background: #fff0f5; /* blush pink */
+  gap: 14px;
+  scroll-behavior: smooth;
 }
 
+/* ✨ Scrollbar */
+.messages::-webkit-scrollbar {
+  width: 8px;
+}
+.messages::-webkit-scrollbar-thumb {
+  background: #ffd3da;
+  border-radius: 4px;
+}
+
+/* 💌 Message Bubbles */
 .message {
   max-width: 70%;
-  padding: 12px 16px;
-  border-radius: 20px;
+  padding: 12px 18px;
+  border-radius: 18px;
   font-size: 15px;
   line-height: 1.5;
   word-wrap: break-word;
-  animation: fadeIn 0.3s ease-in-out;
+  animation: fadeIn 0.3s ease;
 }
 
-/* User messages (right side) */
-.message.user {
-  background: #ff4d6d; /* hot pink-red */
-  align-self: flex-end;
-  border-bottom-right-radius: 6px;
-  color: white;
-  font-weight: 500;
-}
-
-/* Bot messages (left side) */
-.message.bot {
-  background: #ffffff;
-  align-self: flex-start;
-  border-bottom-left-radius: 6px;
-  border: 1px solid #ff1744;
-  color: #b3001b; /* dark red text */
-}
-
-/* Input box stays at bottom */
-.input-container {
-  display: flex;
-  border-top: 1px solid #eee;
-  background: #fff;
-  padding: 12px;
-}
-
-.input-container input {
-  flex: 1;
-  padding: 12px;
-  border-radius: 25px;
-  border: 1px solid #ff99ac;
-  outline: none;
-  font-size: 15px;
-  background: #fff0f5;
-}
-
-.input-container button {
-  margin-left: 12px;
-  padding: 12px 18px;
-  border: none;
-  background: #ff1744; /* red */
-  color: white;
-  font-weight: bold;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.input-container button:hover {
-  background: #b3001b; /* darker red */
-}
-
-/* Smooth fade effect */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(5px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.message.user {
+  background: linear-gradient(135deg, #d51919, #ff5b6e);
+  align-self: flex-end;
+  border-bottom-right-radius: 6px;
+  color: white;
+  font-weight: 500;
+  box-shadow: 0 3px 6px rgba(255, 105, 135, 0.25);
+}
+
+.message.bot {
+  background: white;
+  align-self: flex-start;
+  border-bottom-left-radius: 6px;
+  border: 1px solid #ffd1d9;
+  color: #b3001b;
+  box-shadow: 0 3px 6px rgba(255, 182, 193, 0.2);
+}
+
+/* 🪷 Input Area */
+.input-container {
+  display: flex;
+  padding: 12px 20px;
+  border-top: 1px solid #ffd3da;
+  background: #fff;
+  align-items: center;
+  gap: 10px;
+}
+
+.input-container input {
+  flex: 1;
+  padding: 12px 18px;
+  border-radius: 25px;
+  border: 1.5px solid #ff99a5;
+  outline: none;
+  font-size: 15px;
+  background: #fff0f2;
+  color: black;
+  transition: 0.3s;
+}
+
+.input-container input:focus {
+  border-color: #ff5b6e;
+  box-shadow: 0 0 6px rgba(255, 105, 135, 0.3);
+}
+
+.input-container button {
+  padding: 12px 18px;
+  border: none;
+  background: linear-gradient(135deg, #d51919, #ff5b6e);
+  color: white;
+  font-weight: bold;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 3px 8px rgba(255, 105, 135, 0.25);
+}
+
+.input-container button:hover {
+  background: linear-gradient(135deg, #d51919, #ff5b6e);
+  transform: scale(1.05);
+}
+
+/* 🌸 Options Buttons (Guided Q&A) */
+.options-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 10px;
+  background: #fff;
+}
+
+.option-btn {
+  padding: 12px;
+  border-radius: 25px;
+  border: none;
+  background: linear-gradient(135deg, #ff7f83, #df0f28);
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s ease;
+  box-shadow: 0 3px 8px rgba(255, 105, 135, 0.25);
+}
+
+.option-btn:hover {
+  background: linear-gradient(135deg, #ff99a8, #ff5b6e);
+  transform: translateY(-2px);
 }

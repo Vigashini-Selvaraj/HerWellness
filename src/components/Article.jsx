@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { marked } from "marked";
 import insightsData from "./insights.json";
-import "./insights.css";
+import "./Insights.css";
 
 export default function Article() {
   const { id } = useParams();
@@ -10,7 +10,21 @@ export default function Article() {
 
   useEffect(() => {
     const foundArticle = insightsData.find((a) => a.id.toString() === id);
-    setArticle(foundArticle || null);
+    if (foundArticle) {
+      // Hero image from src/assets
+      try {
+        foundArticle.heroImage = require(`../assets/${foundArticle.image}`);
+      } catch {
+        foundArticle.heroImage = null;
+      }
+
+      // No images inside content needed
+      foundArticle.processedContent = foundArticle.content;
+
+      setArticle(foundArticle);
+    } else {
+      setArticle(null);
+    }
   }, [id]);
 
   if (!article) {
@@ -25,22 +39,18 @@ export default function Article() {
 
   return (
     <div className="article-page">
+      {article.heroImage && (
+        <div className="article-hero">
+          <img className="hero-img" src={article.heroImage} alt={article.title} />
+        </div>
+      )}
+
       <div className="article-wrapper">
-        {article.image && (
-          <div className="article-hero">
-            <img src={article.image} alt={article.title} />
-          </div>
-        )}
-
         <h1 className="article-title">{article.title}</h1>
-
-        {article.description && (
-          <p className="article-desc">{article.description}</p>
-        )}
-
+        {article.topic && <p className="article-topic">{article.topic}</p>}
         <div
           className="article-content"
-          dangerouslySetInnerHTML={{ __html: marked.parse(article.content) }}
+          dangerouslySetInnerHTML={{ __html: marked.parse(article.processedContent) }}
         />
       </div>
     </div>

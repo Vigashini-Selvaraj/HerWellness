@@ -1,67 +1,58 @@
 import React, { useState } from "react";
-import "./Auth.css";
+import { registerUser, loginUser } from "../api/auth";
 
 export default function Auth({ onLogin }) {
   const [isRegister, setIsRegister] = useState(false);
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const users = JSON.parse(localStorage.getItem("users")) || {};
 
     if (isRegister) {
-      if (!email || !password || !name) return alert("Fill all fields");
-      if (users[email]) return alert("User already exists");
-      users[email] = { name, password };
-      localStorage.setItem("users", JSON.stringify(users));
-      alert("Registered successfully! Please login");
-      setIsRegister(false);
+      const res = await registerUser({ name, email, password });
+      setMessage(res.message || res.error);
     } else {
-      if (!email || !password) return alert("Fill all fields");
-      if (!users[email] || users[email].password !== password)
-        return alert("Invalid credentials");
-      onLogin(email);
+      const res = await loginUser({ email, password });
+      setMessage(res.message || res.error);
+      if (res.user && onLogin) {
+        onLogin(res.user); // Pass user data to parent
+      }
     }
   };
 
   return (
-    <div className="auth-modal">
-      <div className="auth-content">
-        <h2>{isRegister ? "Register" : "Login"}</h2>
-        <form onSubmit={handleSubmit}>
-          {isRegister && (
-            <input
-              type="text"
-              placeholder="Full Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          )}
+    <div>
+      <h2>{isRegister ? "Register" : "Login"}</h2>
+      <form onSubmit={handleSubmit}>
+        {isRegister && (
           <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button className="btn btn-pink" type="submit">
-            {isRegister ? "Register" : "Login"}
-          </button>
-        </form>
-        <p onClick={() => setIsRegister(!isRegister)}>
-          {isRegister
-            ? "Already have an account? Login"
-            : "Don't have an account? Register"}
-        </p>
-      </div>
+        )}
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button type="submit">{isRegister ? "Register" : "Login"}</button>
+      </form>
+      <p>{message}</p>
+      <button onClick={() => setIsRegister(!isRegister)}>
+        {isRegister ? "Already have an account? Login" : "Need an account? Register"}
+      </button>
     </div>
   );
 }
-

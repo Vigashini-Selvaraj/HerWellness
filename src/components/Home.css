@@ -1,7 +1,7 @@
 /* Global Home Container */
 .home-container {
-  width: 100vw;                   /* full width */
-  min-height: 100vh;              /* at least full screen */
+  width: 100vw;
+  min-height: 100vh;
   background: linear-gradient(135deg, #ffe6f0, #fff0f5, #fffaf0);
   margin: 0;
   padding: 0;
@@ -12,7 +12,7 @@
 /* Hero Section */
 .hero-section {
   width: 100vw;
-  min-height: 100vh;
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,12 +21,11 @@
   padding: 2rem;
 }
 
-/* Make hero paragraph narrower and centered */
+/* Hero paragraph */
 .hero-paragraph {
-  max-width: 700px;  /* adjust width as needed */
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.7;   /* improve readability */
+  max-width: 700px;
+  margin: 1rem auto;
+  line-height: 1.7;
 }
 
 /* About Section */
@@ -36,61 +35,213 @@
   background: linear-gradient(135deg, #ffe6f0, #fff0f5, #fffaf0);
 }
 
-.about-section .row {
-  margin-left: 0;
-  margin-right: 0;
-}
-
-.about-section .col-md-6 {
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
 /* Facts Section */
-.facts-section {
-  width: 100vw;
-  padding: 5vw;
-  background: linear-gradient(135deg, #ffe6f0, #fff0f5, #fffaf0);
-}
-
 .fact-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-fact:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+}
+
+/* Testimonials */
+/* Testimonial Images */
+.testimonial-img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Star Ratings */
+.rating .star {
+  font-size: 1rem;
+  color: #ddd;
+  margin-right: 2px;
+}
+
+.rating .star.filled {
+  color: #ffc107; /* gold */
+}
+
+/* Card Hover Zoom */
+.hover-zoom {
   transition: transform 0.3s ease;
 }
 
-.fact-card:hover {
-  transform: scale(1.03);
+.hover-zoom:hover {
+  transform: scale(1.08);
 }
 
-/* Testimonials Section */
-.testimonials-section {
-  width: 100vw;
-  padding: 5vw;
-  background: linear-gradient(135deg, #ffe6f0, #fff0f5, #fffaf0);
+/* Card Pop-Up Animation */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-.testimonial-card {
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Facts & Testimonial hover */
+.hover-fact {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-fact:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+}
+
+/* Ratings */
+.rating .star {
+  color: #ddd;
+  margin-right: 2px;
+}
+
+.rating .star.filled {
+  color: #ffc107;
+}
+
+/* Button hover */
+.animate-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+/* Skeleton */
+.skeleton {
+  background: linear-gradient(90deg, #eee 25%, #ddd 50%, #eee 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 12px;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.hero-skeleton-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.hero-skeleton {
+  width: 80%;
+  height: 30px;
+  border-radius: 8px;
+}
+
+/* Animate on scroll */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hover Zoom for images */
+.hover-zoom {
+  transition: transform 0.3s ease;
+}
+.hover-zoom:hover {
+  transform: scale(1.08);
+}
+/* Home.css */
+
+/* General animate-on-scroll */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px) scale(0.95); /* initial lower and smaller */
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1); /* lift & scale up */
+}
+
+/* Hover zoom effect for images */
+.hover-zoom {
   transition: transform 0.3s ease;
 }
 
-.testimonial-card:hover {
+.hover-zoom:hover {
   transform: scale(1.05);
 }
 
-/* FAQs Section */
-.faqs-section {
-  width: 100vw;
-  padding: 5vw;
-  background: linear-gradient(135deg, #ffe6f0, #fff0f5, #fffaf0);
+/* Facts & Testimonial cards */
+.fact-card,
+.testimonial-card {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-.accordion-button {
-  font-weight: 600;
-  color: #dc3545; /* Bootstrap danger red */
+.fact-card:hover,
+.testimonial-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* Responsive images */
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
+/* Star ratings */
+.star {
+  color: #ccc;
+  margin-right: 2px;
 }
+
+.star.filled {
+  color: #f8d64e;
+}
+
+/* Testimonial image */
+.testimonial-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Button */
+.btn-danger {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-danger:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+/* Footer */
+.footer {
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.footer h5 {
+  margin-bottom: 1rem;
+}
+
+.footer p, .footer a {
+  font-size: 0.9rem;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.social-icons a {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.social-icons a:hover {
+  transform: scale(1.2);
+}
+
