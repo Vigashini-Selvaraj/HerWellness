@@ -3,7 +3,7 @@
 /* ----------------------------- */
 
 .page-title {
-  margin-top: 50px;
+  margin-top: 100px; /* pushes below fixed navbar */
   text-align: center;
   font-size: 2rem;
   font-weight: 700;
@@ -20,6 +20,7 @@
   width: 100%;
   box-sizing: border-box;
   background: linear-gradient(135deg, #ffe6f0, #fff0f5, #fffaf0);
+  min-height: 100vh;
 }
 
 .insights-row {
@@ -38,17 +39,19 @@
   text-align: center;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
 .insight-card img {
   width: 100%;
-  height: auto;
+  height: 220px;
+  object-fit: cover;
   display: block;
 }
 
 .insight-card h3 {
   margin: 10px;
-  font-size: 20px;
+  font-size: 1.2rem;
   color: #dc3545;
 }
 
@@ -62,6 +65,7 @@
   transform: translateY(-6px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
+
 /* ----------------------------- */
 /* Article Page - Full Screen     */
 /* ----------------------------- */
@@ -70,7 +74,7 @@
   width: 100%;
   min-height: 100vh;
   background: linear-gradient(135deg, #ffe6f0, #fff0f5, #fffaf0);
-  padding: 50px 20px;
+  padding: 100px 20px 50px; /* top padding added for navbar */
   box-sizing: border-box;
   display: flex;
   justify-content: center;
@@ -78,29 +82,22 @@
   animation: fadeIn 1s ease forwards;
 }
 
-
-/* Article wrapper - full width with shadow and hover effect */
 .article-wrapper {
-  width: 100%;               /* take full width */
-  max-width: none;           /* remove max-width */
-  margin: 0;                 /* remove centering */
+  width: 100%;
+  max-width: 1000px;
   background: #fff;
   padding: 50px;
-  border-radius: 0;          /* optional: remove rounded corners */
+  border-radius: 16px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
   transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.3s ease;
-  position: relative;
 }
 
-
-/* Hover effect - lift + shadow + subtle background */
 .article-wrapper:hover {
   transform: translateY(-8px);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
   background: #fff0f5;
 }
 
-/* Title styling */
 .article-title {
   font-size: 2.6rem;
   font-weight: 700;
@@ -109,7 +106,6 @@
   position: relative;
 }
 
-/* Animated underline for title */
 .article-title::after {
   content: "";
   display: block;
@@ -122,10 +118,9 @@
 }
 
 .article-wrapper:hover .article-title::after {
-  width: 50px;
+  width: 60px;
 }
 
-/* Topic styling */
 .article-topic {
   font-size: 1.1rem;
   font-style: italic;
@@ -133,14 +128,12 @@
   margin-bottom: 25px;
 }
 
-/* Article content styling */
 .article-content {
   font-size: 1.125rem;
   line-height: 1.8;
   color: #444;
 }
 
-/* Headings inside content with colored border accent */
 .article-content h2,
 .article-content h3 {
   margin-top: 30px;
@@ -163,7 +156,6 @@
   border-radius: 2px;
 }
 
-/* Paragraphs and lists */
 .article-content p {
   margin-bottom: 18px;
   line-height: 1.9;
@@ -180,7 +172,6 @@
   margin-bottom: 10px;
 }
 
-/* Horizontal rule */
 .article-content hr {
   border: none;
   border-top: 1px solid #eee;
@@ -199,7 +190,11 @@
   }
 }
 
-/* Responsive adjustments */
+/* ----------------------------- */
+/* Responsive Design (Phones + Tablets) */
+/* ----------------------------- */
+
+/* Tablets */
 @media (max-width: 1024px) {
   .article-wrapper {
     padding: 40px;
@@ -209,20 +204,108 @@
   }
 }
 
+/* Phones */
 @media (max-width: 768px) {
+  .page-title {
+    font-size: 1.8rem;
+  }
+
+  .insights-row {
+    grid-template-columns: 1fr; /* stack cards vertically */
+    gap: 20px;
+  }
+
+  .insight-card img {
+    height: 180px;
+  }
+
+  .insight-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .insight-card p {
+    font-size: 0.9rem;
+  }
+
   .article-wrapper {
     padding: 30px;
   }
   .article-title {
     font-size: 1.9rem;
   }
+  .article-content {
+    font-size: 1rem;
+  }
 }
 
+/* Small Phones */
 @media (max-width: 480px) {
+  .page-title {
+    margin-top: 80px;
+    font-size: 1.6rem;
+  }
+  .insight-card h3 {
+    font-size: 1rem;
+  }
+  .insight-card p {
+    font-size: 0.85rem;
+  }
+
+  .insight-card img {
+    height: 150px;
+  }
+
   .article-wrapper {
     padding: 20px;
   }
   .article-title {
     font-size: 1.6rem;
+  }
+  .article-content {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  .article-content ul,
+  .article-content ol {
+    padding-left: 18px;
+  }
+}
+
+/* ----------------------------- */
+/* Navbar fix for mobile         */
+/* ----------------------------- */
+
+.navbar {
+  background-color: #dc3545 !important;
+}
+
+.navbar .navbar-brand,
+.navbar .nav-link {
+  color: #fff !important;
+}
+
+.navbar .navbar-toggler {
+  border-color: #fff;
+}
+
+.navbar .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255,255,255,1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+/* ----------------------------- */
+/* Mobile adjustments (small margins) */
+/* ----------------------------- */
+@media (max-width: 480px) {
+  .insights-container {
+    margin-top: 20px;   /* small top margin */
+    margin-bottom: 20px; /* small bottom margin */
+  }
+
+  .insight-card {
+    margin-bottom: 15px; /* space between stacked cards */
+  }
+
+  .article-wrapper {
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
 }

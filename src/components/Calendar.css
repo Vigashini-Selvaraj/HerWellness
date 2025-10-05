@@ -192,3 +192,98 @@ margin-top: 100px;
   }
 }
 
+/* ----------------------------- */
+/* Calendar Mobile Responsive    */
+/* ----------------------------- */
+
+@media (max-width: 1024px) {
+  .calendar-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 months per row */
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .month-card {
+    padding: 15px;
+    margin: 8px;
+  }
+
+  .days-grid {
+    gap: 6px;
+  }
+
+  .day {
+    width: 35px;
+    height: 35px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .calendar-container {
+    grid-template-columns: 1fr; /* 1 month per row */
+    padding: 15px;
+    gap: 15px;
+  }
+
+  .month-card {
+    padding: 12px;
+    margin: 6px 0;
+  }
+
+  .days-grid {
+    gap: 5px;
+  }
+
+  .day {
+    width: 32px;
+    height: 32px;
+    font-size: 0.8rem;
+  }
+
+  .calendar-heading {
+    font-size: 1.6rem;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+
+  .quote-box {
+    max-width: 90%;
+    padding: 12px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .calendar-container {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .month-card {
+    padding: 10px;
+    margin: 5px 0;
+  }
+
+  .days-grid {
+    gap: 4px;
+  }
+
+  .day {
+    width: 28px;
+    height: 28px;
+    font-size: 0.75rem;
+  }
+
+  .calendar-heading {
+    font-size: 1.4rem;
+    margin-top: 8px;
+    margin-bottom: 15px;
+  }
+
+  .quote-box {
+    max-width: 95%;
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+}
