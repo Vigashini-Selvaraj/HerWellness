@@ -1,5 +1,5 @@
-const AUTH_URL = "http://localhost:3000/api/auth";
-const CALENDAR_URL = "http://localhost:3000/api/calendar";
+const AUTH_URL = "https://herwellness-backend.onrender.com/api/auth";
+const CALENDAR_URL = "https://herwellness-backend.onrender.com/api/calendar";
 
 // ========== AUTH APIs ==========
 

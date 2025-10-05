@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3000/api/calendar";
+const BASE_URL = "https://herwellness-backend.onrender.com/api/calendar";
 
 export async function fetchMarkedDates(email) {
   const res = await fetch(`${BASE_URL}/${encodeURIComponent(email)}`);

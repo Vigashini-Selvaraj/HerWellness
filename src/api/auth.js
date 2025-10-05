@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3000/api/auth";
+const BASE_URL = "https://herwellness-backend.onrender.com/api/auth";
 
 // Register user
 export async function registerUser(data) {
