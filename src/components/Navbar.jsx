@@ -1,138 +1,116 @@
-// src/components/Navbar.jsx
-import React from "react";
+import React, { useState } from "react";
 import "./Navbar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { Modal } from "bootstrap";
 import { Link } from "react-router-dom";
 import { loginUser, registerUser } from "../api/auth";
 
 export default function Navbar({ currentUser, setCurrentUser }) {
-  // Logout
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+
+  const [regName, setRegName] = useState("");
+  const [regEmail, setRegEmail] = useState("");
+  const [regPassword, setRegPassword] = useState("");
+  const [regConfirmPassword, setRegConfirmPassword] = useState("");
+
+  const [navbarOpen, setNavbarOpen] = useState(false); // track collapse state
+
+  const resetLoginFields = () => {
+    setLoginEmail("");
+    setLoginPassword("");
+  };
+
+  const resetRegisterFields = () => {
+    setRegName("");
+    setRegEmail("");
+    setRegPassword("");
+    setRegConfirmPassword("");
+  };
+
+  const toggleNavbar = () => setNavbarOpen(!navbarOpen);
+
+  const closeNavbar = () => setNavbarOpen(false); // close when link clicked
+
   const handleLogout = () => {
     setCurrentUser(null);
     localStorage.removeItem("currentUser");
     alert("Logged out successfully!");
   };
 
-  // Login
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const email = e.target[0].value;
-      const password = e.target[1].value;
+      const response = await loginUser({ email: loginEmail, password: loginPassword });
+      if (response.error) return alert(response.error);
 
-      const response = await loginUser({ email, password });
+      setCurrentUser(response.user);
+      localStorage.setItem("currentUser", JSON.stringify(response.user));
+      resetLoginFields();
 
-      if (response.error) {
-        alert(response.error);
-        return;
-      }
-
-      const user = response.user; // { name, email, password, _id }
-
-      // Hide modal
       const modalEl = document.getElementById("loginModal");
-      const modalInstance = Modal.getInstance(modalEl) || new Modal(modalEl);
-     
-
-      // Update state
-      setTimeout(() => {
-        setCurrentUser(user);
-        localStorage.setItem("currentUser", JSON.stringify(user));
-        alert(response.message); // "Login successful"
-      }, 100);
-    } catch (err) {
-      alert(err.message || "Login failed");
+      Modal.getInstance(modalEl)?.hide();
+      alert(response.message);
+    } catch {
+      alert("Login failed");
     }
   };
 
-  // Register
   const handleRegister = async (e) => {
     e.preventDefault();
-    try {
-      const name = e.target[0].value;
-      const email = e.target[1].value;
-      const password = e.target[2].value;
-      const confirmPassword = e.target[3].value;
+    if (regPassword !== regConfirmPassword) return alert("Passwords do not match!");
 
-      if (password !== confirmPassword) return alert("Passwords do not match");
+    const response = await registerUser({ name: regName, email: regEmail, password: regPassword });
+    if (response.error) return alert(response.error);
 
-      const response = await registerUser({ name, email, password });
+    resetRegisterFields();
 
-      if (response.error) {
-        alert(response.error);
-        return;
-      }
+    const modalEl = document.getElementById("registerModal");
+    Modal.getInstance(modalEl)?.hide();
+    alert(response.message);
+  };
 
-      // Hide modal
-      const modalEl = document.getElementById("registerModal");
-      const modalInstance = Modal.getInstance(modalEl) || new Modal(modalEl);
-     
+  const openLoginModal = () => {
+    resetLoginFields();
+    resetRegisterFields();
+    const modalEl = document.getElementById("loginModal");
+    new Modal(modalEl, { backdrop: "static" }).show();
+  };
 
-      setTimeout(() => {
-        alert(response.message); // "User registered successfully"
-      }, 100);
-    } catch (err) {
-      alert(err.message || "Registration failed");
-    }
+  const openRegisterModal = () => {
+    resetLoginFields();
+    resetRegisterFields();
+    const modalEl = document.getElementById("registerModal");
+    new Modal(modalEl, { backdrop: "static" }).show();
   };
 
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-red-navbar fixed-top">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/">
-            HerWellness
-          </Link>
+          <Link className="navbar-brand" to="/">HerWellness</Link>
+
           <button
             className="navbar-toggler"
             type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
+            onClick={toggleNavbar} // manually toggle
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
+
+          <div className={`collapse navbar-collapse ${navbarOpen ? "show" : ""}`} id="navbarNav">
             <ul className="navbar-nav ms-auto">
-              <li className="nav-item mx-2">
-                <Link className="nav-link" to="/home">
-                  Home
-                </Link>
-              </li>
-              <li className="nav-item mx-2">
-                <Link className="nav-link" to="/today">
-                  Today
-                </Link>
-              </li>
-              <li className="nav-item mx-2">
-                <Link className="nav-link" to="/insights">
-                  Insights
-                </Link>
-              </li>
-              <li className="nav-item mx-2">
-                <Link className="nav-link" to="/chat">
-                  Chat
-                </Link>
-              </li>
-              <li className="nav-item mx-2">
-                <Link className="nav-link" to="/calendar">
-                  Calendar
-                </Link>
-              </li>
+              <li className="nav-item mx-2"><Link className="nav-link" to="/home" onClick={closeNavbar}>Home</Link></li>
+              <li className="nav-item mx-2"><Link className="nav-link" to="/today" onClick={closeNavbar}>Today</Link></li>
+              <li className="nav-item mx-2"><Link className="nav-link" to="/insights" onClick={closeNavbar}>Insights</Link></li>
+              <li className="nav-item mx-2"><Link className="nav-link" to="/chat" onClick={closeNavbar}>Chat</Link></li>
+              <li className="nav-item mx-2"><Link className="nav-link" to="/calendar" onClick={closeNavbar}>Calendar</Link></li>
+
               <li className="nav-item mx-2">
                 {currentUser ? (
-                  <button className="btn btn-red" onClick={handleLogout}>
-                    Logout
-                  </button>
+                  <button className="btn btn-red" onClick={() => {handleLogout(); closeNavbar();}}>Logout</button>
                 ) : (
-                  <button
-                    className="btn btn-red"
-                    data-bs-toggle="modal"
-                    data-bs-target="#loginModal"
-                  >
-                    Log In
-                  </button>
+                  <button type="button" className="btn btn-red" onClick={() => {openLoginModal(); closeNavbar();}}>Log In</button>
                 )}
               </li>
             </ul>
@@ -141,58 +119,36 @@ export default function Navbar({ currentUser, setCurrentUser }) {
       </nav>
 
       {/* Login Modal */}
-      <div
-        className="modal fade"
-        id="loginModal"
-        tabIndex="-1"
-        aria-hidden="true"
-      >
+      <div className="modal fade" id="loginModal" tabIndex="-1">
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content p-4 rounded-4 shadow">
             <div className="modal-header border-0">
               <h5 className="modal-title">Log In</h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-              ></button>
+              <button type="button" className="btn-close" data-bs-dismiss="modal"></button>
             </div>
+
             <div className="modal-body">
               <form onSubmit={handleLogin}>
                 <div className="mb-3">
                   <label className="form-label">Email</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    placeholder="Enter email"
-                    required
-                  />
+                  <input type="email" className="form-control" placeholder="Enter email"
+                    required value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} />
                 </div>
+
                 <div className="mb-3">
                   <label className="form-label">Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    placeholder="Enter password"
-                    required
-                  />
+                  <input type="password" className="form-control" placeholder="Enter password"
+                    required value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
                 </div>
-                <button type="submit" className="btn btn-red">
-                  Login
-                </button>
+
+                <button type="submit" className="btn btn-red">Login</button>
               </form>
             </div>
+
             <div className="modal-footer border-0 justify-content-center">
               <small>
                 Don’t have an account?{" "}
-                <a
-                  href="#"
-                  data-bs-toggle="modal"
-                  data-bs-target="#registerModal"
-                  data-bs-dismiss="modal"
-                >
-                  Register
-                </a>
+                <a href="#" onClick={() => { Modal.getInstance(document.getElementById("loginModal"))?.hide(); openRegisterModal(); }}>Register</a>
               </small>
             </div>
           </div>
@@ -200,76 +156,48 @@ export default function Navbar({ currentUser, setCurrentUser }) {
       </div>
 
       {/* Register Modal */}
-      <div
-        className="modal fade"
-        id="registerModal"
-        tabIndex="-1"
-        aria-hidden="true"
-      >
+      <div className="modal fade" id="registerModal" tabIndex="-1">
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content p-4 rounded-4 shadow">
             <div className="modal-header border-0">
               <h5 className="modal-title">Register</h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-              ></button>
+              <button type="button" className="btn-close" data-bs-dismiss="modal"></button>
             </div>
+
             <div className="modal-body">
               <form onSubmit={handleRegister}>
                 <div className="mb-3">
                   <label className="form-label">Full Name</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Enter name"
-                    required
-                  />
+                  <input type="text" className="form-control" placeholder="Enter name"
+                    required value={regName} onChange={(e) => setRegName(e.target.value)} />
                 </div>
+
                 <div className="mb-3">
                   <label className="form-label">Email</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    placeholder="Enter email"
-                    required
-                  />
+                  <input type="email" className="form-control" placeholder="Enter email"
+                    required value={regEmail} onChange={(e) => setRegEmail(e.target.value)} />
                 </div>
+
                 <div className="mb-3">
                   <label className="form-label">Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    placeholder="Create password"
-                    required
-                  />
+                  <input type="password" className="form-control" placeholder="Create password"
+                    required value={regPassword} onChange={(e) => setRegPassword(e.target.value)} />
                 </div>
+
                 <div className="mb-3">
                   <label className="form-label">Confirm Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    placeholder="Confirm password"
-                    required
-                  />
+                  <input type="password" className="form-control" placeholder="Confirm password"
+                    required value={regConfirmPassword} onChange={(e) => setRegConfirmPassword(e.target.value)} />
                 </div>
-                <button type="submit" className="btn btn-red">
-                  Register
-                </button>
+
+                <button type="submit" className="btn btn-red">Register</button>
               </form>
             </div>
+
             <div className="modal-footer border-0 justify-content-center">
               <small>
                 Already have an account?{" "}
-                <a
-                  href="#"
-                  data-bs-toggle="modal"
-                  data-bs-target="#loginModal"
-                  data-bs-dismiss="modal"
-                >
-                  Login
-                </a>
+                <a href="#" onClick={() => { Modal.getInstance(document.getElementById("registerModal"))?.hide(); openLoginModal(); }}>Login</a>
               </small>
             </div>
           </div>

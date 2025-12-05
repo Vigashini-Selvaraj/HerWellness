@@ -1,5 +1,6 @@
-const AUTH_URL = "https://herwellness-backend.onrender.com/api/auth";
-const CALENDAR_URL = "https://herwellness-backend.onrender.com/api/calendar";
+import {baseApi} from './baseapi'
+const AUTH_URL = `${baseApi}/auth`;
+const CALENDAR_URL = `${baseApi}/calendar`;
 
 // ========== AUTH APIs ==========
 

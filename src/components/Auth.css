@@ -70,3 +70,19 @@
   cursor: pointer;
   font-weight: bold;
 }
+/* Mobile modal spacing */
+@media (max-width: 768px) {
+  .modal-dialog {
+    margin: 80px auto 20px auto; /* top margin = navbar height */
+    max-width: 95%; /* take almost full screen */
+  }
+
+  .modal-content {
+    padding: 20px;
+  }
+
+  body.modal-open {
+    padding-top: 0 !important; /* reset Bootstrap padding */
+  }
+}
+

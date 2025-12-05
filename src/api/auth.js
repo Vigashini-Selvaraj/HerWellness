@@ -1,4 +1,5 @@
-const BASE_URL = "https://herwellness-backend.onrender.com/api/auth";
+import {baseApi} from '../baseapi'
+const BASE_URL = `${baseApi}/auth`;
 
 // Register user
 export async function registerUser(data) {

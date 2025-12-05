@@ -1,0 +1,1 @@
+export const baseApi = "https://herwellness-backend.onrender.com/api"

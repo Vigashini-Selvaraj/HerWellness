@@ -1,149 +1,138 @@
-/* -------------------- NAVBAR -------------------- */
-
-/* Navbar red background */
+/* Navbar Background */
 .bg-red-navbar {
-  background-color: #dc3545; /* Bootstrap red */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background-color: #dc3545;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   transition: background 0.3s ease;
   padding: 0.8rem 1rem;
 }
 
-/* Navbar brand text logo */
+/* Brand */
 .navbar-brand {
-  font-family: 'Montserrat', sans-serif;
   font-size: 2rem;
   color: #fff !important;
-  letter-spacing: 1px;
-  transition: transform 0.3s ease, color 0.3s ease;
+  font-weight: 700;
+  transition: transform 0.3s ease;
 }
-
 .navbar-brand:hover {
-  color: #ffdddd !important;
   transform: scale(1.05);
 }
 
-/* Navbar buttons */
-.btn-red {
-  background-color: #e85c6d;
-  border: none;
-  color: #fff;
-  font-weight: 600;
-  padding: 8px 22px;
-  border-radius: 12px;
-  font-size: 16px;
-  transition: all 0.3s ease;
+/* Nav Links */
+.navbar-nav .nav-link {
+  color: #fff !important;
+  font-weight: 500;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+.navbar-nav .nav-link:hover {
+  color: #ffcccc !important;
 }
 
+/* Buttons */
+.btn-red {
+  background-color: #e85c6d;
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 8px 22px;
+  transition: all 0.3s;
+}
 .btn-red:hover {
   background-color: #c74355;
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  color: #fff;
 }
 
-/* Navbar links */
-.navbar-nav .nav-link {
-  font-size: 18px;
-  font-weight: 500;
-  color: #fff !important;
-  transition: color 0.3s ease, transform 0.2s ease;
-}
-
-.navbar-nav .nav-link:hover {
-  color: #ffcccc !important;
-  transform: scale(1.05);
-}
-
-/* -------------------- MODAL STYLING -------------------- */
-
-/* Modal background */
+/* Modals */
 .modal-content {
-  background-color: #ffe4e8; /* soft pink for contrast */
+  background-color: #ffe4e8;
   border-radius: 20px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
-
-/* Modal header title */
 .modal-title {
   color: #e85c6d;
   font-weight: 600;
-  font-size: 1.5rem;
 }
-
-/* Input fields inside modal */
 .modal-body .form-control {
   border-radius: 10px;
   border: 1px solid #e85c6d;
 }
-
-/* Buttons inside modal (Login/Register) */
 .modal-body .btn-red {
   width: 100%;
   margin-top: 10px;
-  background-color: #dc3545;
-  border: none;
-  color: #fff;
-  font-weight: 600;
-  padding: 10px 0;
-  font-size: 16px;
-  border-radius: 10px;
-  transition: all 0.3s ease;
 }
 
-.modal-body .btn-red:hover {
-  background-color: #c74355;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+/* Ensure modals are always above backdrop */
+.modal-backdrop {
+  z-index: 1040 !important;
+}
+.modal {
+  z-index: 1050 !important;
 }
 
-/* Modal footer links */
-.modal-footer small a {
-  color: #e85c6d;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.modal-footer small a:hover {
-  text-decoration: underline;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .navbar-nav .nav-link {
-    font-size: 16px;
-  }
-}
-/* --- Prevent Navbar Toggle Overlap --- */
+/* Mobile Navbar Fix */
 @media (max-width: 991px) {
-  .navbar {
-    position: relative; /* allow menu to expand naturally */
+  body {
+    padding-top: 160px; /* ensures content below expanded navbar */
   }
 
   .navbar-collapse {
-    position: relative;
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
     background-color: #dc3545;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 999;
     border-radius: 0 0 10px 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-
-  body {
-    padding-top: 80px; /* ensures page starts below navbar */
-  }
-
-  /* adjust nav links for mobile */
-  .navbar-nav {
-    padding: 15px 0;
   }
 
   .navbar-nav .nav-link {
-    color: #fff !important;
     text-align: center;
     padding: 10px 0;
-    display: block;
   }
 }
 
+@media (max-width: 576px) {
+  body {
+    padding-top: 180px; /* extra for small screens */
+  }
+}
+
+/* Extra top margin to avoid overlap with fixed navbar */
+.home-container {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ffe6f0, #fff0f5, #fffaf0);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+  overflow-x: hidden;
+
+  /* Add extra top margin to push content below navbar */
+  margin-top: 120px; /* desktop default */
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 991px) {
+  .home-container {
+    margin-top: 280px; /* for tablets and collapsed navbar */
+  }
+}
+@media (max-width: 576px) {
+  .home-container {
+    margin-top: 300px; /* extra for small mobile screens */
+  }
+}
+
+/* Optional: smooth modal transitions */
+.modal.fade .modal-dialog {
+  transition: transform 0.3s ease-out;
+  transform: translateY(-50px);
+}
+.modal.show .modal-dialog {
+  transform: translateY(0);
+}
+
+/* Fix scroll lock if modal leaves dim */
+body.modal-open {
+  overflow: hidden;
+}

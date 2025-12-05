@@ -331,3 +331,32 @@ input:focus {
     padding: 15px;
   }
 }
+.today-page {
+  max-width: 1400px;
+  margin: 120px auto 30px; /* Increased top margin to avoid navbar overlap */
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 992px) {
+  .today-page {
+    padding: 0 15px;
+    margin: 110px auto 20px; /* extra top margin for tablet */
+  }
+}
+
+@media (max-width: 768px) {
+  .today-page {
+    margin: 100px auto 20px; /* extra top margin for mobile */
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .today-page {
+    margin: 350px auto 15px; /* extra top margin for small mobile screens */
+  }
+}

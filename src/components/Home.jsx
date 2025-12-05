@@ -1,12 +1,12 @@
 // src/pages/Home.jsx
 import React, { useState, useEffect } from "react";
 import "./Home.css";
-import finImg from "../assets/fin.jpg";
-import finImgg from "../assets/girl.jpg";
-import finImgg1 from "../assets/girl2.jpg";
-import user1 from "../assets/1.jpeg";
-import user2 from "../assets/2.jpeg";
-import user3 from "../assets/3.jpeg";
+import finImg from "/assets/fin.jpg";
+import finImgg from "/assets/girl.jpg";
+import finImgg1 from "/assets/girl2.jpg";
+import user1 from "/assets/1.jpeg";
+import user2 from "/assets/2.jpeg";
+import user3 from "/assets/3.jpeg";
 import { FaTwitter, FaFacebookF, FaInstagram } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
@@ -73,7 +73,7 @@ const Home = ({ currentUser, onGetStarted }) => {
   }, []);
 
   return (
-    <div className="home-container">
+    <div className="home-container mt-5 pt-5 md-0 pt-md-0">
 
       {/* Hero Section */}
       <section className="hero-section text-center">
